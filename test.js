@@ -33,8 +33,11 @@ function call(handler, method, url, body, ip = '1.1.1.1') {
   const excluded = await call(code, 'GET', '/api/code?exclude=K4M2QP');
   assert.strictEqual(excluded.body.code, 'ZZZ999');
   const next = await call(code, 'GET', '/api/code');
-  assert.strictEqual(next.body.code, 'K4M2QP'); // least recently served
+  assert.strictEqual(next.body.code, 'K4M2QP'); // oldest registered first
   assert.strictEqual(next.body.remaining, 24);
+  const again = await call(code, 'GET', '/api/code');
+  assert.strictEqual(again.body.code, 'K4M2QP'); // stays on it until used up, no rotation
+  assert.strictEqual(again.body.remaining, 23);
 
   assert.strictEqual((await call(report, 'POST', '/api/report', { code: 'K4M2QP', result: 'worked' })).status, 200);
   assert.strictEqual((await call(report, 'POST', '/api/report', { code: 'K4M2QP', result: 'worked' })).status, 429);
@@ -44,7 +47,7 @@ function call(handler, method, url, body, ip = '1.1.1.1') {
   const s = (await call(stats, 'GET', '/api/stats')).body;
   assert.strictEqual(s.inPool, 1); // ZZZ999 retired
   assert.strictEqual(s.confirmed, 1);
-  assert.strictEqual(s.recent.length, 2);
+  assert.strictEqual(s.recent.length, 3);
   assert.strictEqual(s.added.length, 2);
   assert.ok(s.added.find((a) => a.code === 'ZZZ999').retired);
 

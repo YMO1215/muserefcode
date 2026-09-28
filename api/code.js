@@ -1,8 +1,9 @@
-// GET /api/code?exclude=AAA,BBB — hand out the least-recently-served code.
+// GET /api/code?exclude=AAA,BBB — hand out the oldest-registered code that
+// isn't the caller's own, so earlier codes are used up first.
 const { store, remaining, DEAD_REPORTS } = require('../lib/store');
 const { normalizeCode, clientIp, send, wrap } = require('../lib/http');
 
-const CANDIDATES = 10;
+const CANDIDATES = 20; // enough to skip past a caller's own codes
 
 module.exports = wrap(async (req, res) => {
   if (req.method !== 'GET') return send(res, 405, { error: '허용되지 않는 요청 방식입니다.' });
