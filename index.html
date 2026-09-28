@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MuseRef — Muse referral codes, shared fairly</title>
+<meta name="description" content="Free, community-shared Meta Muse referral codes. Take a code, leave yours behind — both of you get bonus tokens. Codes rotate so none burn out.">
+<meta property="og:title" content="MuseRef — Muse referral codes, shared fairly">
+<meta property="og:description" content="Take a code. Leave one behind. A fair rotating pool of Muse referral codes.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0e0f14">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<style>
+  :root {
+    --bg: #0e0f14; --panel: #161821; --line: #262938; --text: #eceef5; --dim: #9aa0b4;
+    --accent: #8b7bff; --accent2: #4fd1c5; --ok: #3ecf8e; --bad: #ff6b81;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background-image: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139,123,255,.18), transparent);
+  }
+  a { color: var(--accent2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+  .brand { font-weight: 700; font-size: 18px; color: var(--text); }
+  .brand span { color: var(--accent); }
+  nav a { color: var(--dim); margin-left: 18px; font-size: 14px; }
+  .hero { text-align: center; padding: 48px 0 24px; }
+  h1 { font-size: clamp(32px, 6vw, 48px); line-height: 1.15; margin: 0 0 16px; letter-spacing: -0.02em; }
+  h1 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { color: var(--dim); max-width: 560px; margin: 0 auto; }
+  .stats { margin-top: 18px; font-size: 14px; color: var(--dim); }
+  .stats b { color: var(--text); }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; margin: 24px 0; }
+  .codebox { text-align: center; }
+  .code {
+    font: 700 clamp(32px, 8vw, 46px)/1.2 ui-monospace, "SF Mono", Consolas, monospace;
+    letter-spacing: .14em; margin: 8px 0; min-height: 56px; user-select: all;
+  }
+  .code.placeholder { color: #3a3e52; }
+  .meta { color: var(--dim); font-size: 14px; min-height: 22px; }
+  .btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  button {
+    font: inherit; font-weight: 600; border-radius: 10px; padding: 11px 20px; cursor: pointer;
+    border: 1px solid var(--line); background: #1f2230; color: var(--text); transition: .15s;
+  }
+  button:hover:not(:disabled) { border-color: var(--accent); }
+  button:disabled { opacity: .5; cursor: default; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button.primary:hover:not(:disabled) { filter: brightness(1.1); }
+  button.ok { color: var(--ok); }
+  button.bad { color: var(--bad); }
+  .feedback { display: none; margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--line); }
+  .feedback.show { display: block; }
+  .feedback p { margin: 0 0 4px; color: var(--dim); font-size: 14px; }
+  h2 { font-size: 22px; margin: 0 0 14px; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+  .step { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+  .step .n { color: var(--accent); font-weight: 700; font-size: 13px; }
+  .step h3 { margin: 4px 0 6px; font-size: 16px; }
+  .step p { margin: 0; color: var(--dim); font-size: 14px; }
+  form { display: flex; gap: 10px; flex-wrap: wrap; }
+  input {
+    flex: 1 1 200px; font: 600 18px ui-monospace, Consolas, monospace; letter-spacing: .1em; text-transform: uppercase;
+    background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px;
+  }
+  input:focus { outline: none; border-color: var(--accent); }
+  .msg { font-size: 14px; margin-top: 10px; min-height: 20px; }
+  .msg.ok { color: var(--ok); } .msg.err { color: var(--bad); }
+  ul.recent { list-style: none; margin: 0; padding: 0; }
+  ul.recent li { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  ul.recent li:last-child { border-bottom: 0; }
+  ul.recent code { font: 600 15px ui-monospace, Consolas, monospace; letter-spacing: .08em; }
+  ul.recent .t { color: var(--dim); }
+  .empty { color: var(--dim); font-size: 14px; }
+  details { border-bottom: 1px solid var(--line); padding: 14px 0; }
+  details:last-child { border-bottom: 0; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { color: var(--dim); margin: 10px 0 0; font-size: 15px; }
+  .warn { text-align: center; color: var(--dim); font-size: 14px; }
+  footer { color: var(--dim); font-size: 13px; text-align: center; padding: 32px 0 48px; border-top: 1px solid var(--line); margin-top: 32px; }
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(80px);
+    background: var(--ok); color: #06140d; font-weight: 600; padding: 10px 18px; border-radius: 10px; transition: .25s; opacity: 0;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">✦ Muse<span>Ref</span></a>
+    <nav><a href="#share">Share</a><a href="#faq">FAQ</a></nav>
+  </header>
+
+  <section class="hero">
+    <h1>Take a code.<br><em>Leave one behind.</em></h1>
+    <p class="lead">Redeem someone's Muse referral code and you both get bonus tokens. Codes rotate through a shared pool so no single code gets burned out in minutes.</p>
+    <div class="stats" id="stats"><b id="s-pool">–</b> codes in rotation · <b id="s-conf">–</b> confirmed redemptions</div>
+  </section>
+
+  <section class="card codebox">
+    <div class="meta">Your code</div>
+    <div class="code placeholder" id="code">––––––</div>
+    <div class="meta" id="code-meta">Press the button to get the next code in rotation.</div>
+    <div class="btns">
+      <button class="primary" id="get">Get a code</button>
+      <button id="copy" disabled>Copy</button>
+    </div>
+    <div class="feedback" id="feedback">
+      <p>Did it work? Your answer keeps the pool healthy.</p>
+      <div class="btns">
+        <button class="ok" data-r="worked">✓ It worked</button>
+        <button class="bad" data-r="dead">✕ Used up / invalid</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h3>Get a code</h3><p>We hand out the code that's rested the longest and still has uses left.</p></div>
+      <div class="step"><div class="n">02</div><h3>Redeem in Muse</h3><p>Paste it in Muse's referral / invite settings. Both of you get the bonus.</p></div>
+      <div class="step"><div class="n">03</div><h3>Pay it forward</h3><p>Add your own referral code below so the next person can use it.</p></div>
+    </div>
+  </section>
+
+  <section class="card" id="share">
+    <h2>Add your code to the pool</h2>
+    <form id="add-form">
+      <input id="add-input" maxlength="16" placeholder="e.g. K4M2QP" autocomplete="off" spellcheck="false" aria-label="Your referral code">
+      <button class="primary" type="submit">Add to pool</button>
+    </form>
+    <div class="msg" id="add-msg"></div>
+  </section>
+
+  <section class="card">
+    <h2>Recently handed out</h2>
+    <ul class="recent" id="recent"><li class="empty">Loading…</li></ul>
+  </section>
+
+  <section class="card" id="faq">
+    <h2>FAQ</h2>
+    <details><summary>What do I get for redeeming a code?</summary><p>Muse gives bonus tokens to both the person redeeming and the code owner. The exact amount is set by Meta and may change.</p></details>
+    <details><summary>Where do I redeem it?</summary><p>In the Muse app or on the web, open settings and look for the referral / invite code field.</p></details>
+    <details><summary>Why did my code say it's used up?</summary><p>Each referral code has a limited number of uses (typically 20–30). Tap "Used up / invalid" so we retire it and hand out a fresh one.</p></details>
+    <details><summary>How is "uses left" estimated?</summary><p>We count how many times a code has been handed out here and assume a cap of 25. It's an estimate — people outside this site may have used it too.</p></details>
+    <details><summary>Will I get my own code back?</summary><p>No. Codes you added from this browser are skipped when you ask for one.</p></details>
+    <details><summary>Is this affiliated with Meta?</summary><p>No. MuseRef is an independent community project and is not affiliated with, endorsed by, or sponsored by Meta.</p></details>
+  </section>
+
+  <p class="warn">Codes are public and can run out. <b>Never pay for a referral code.</b></p>
+
+  <footer>
+    MuseRef is an independent community site, not affiliated with Meta. “Muse” is a trademark of its owner.<br>
+    We store only the codes you submit and anonymous usage counts. No accounts, no tracking cookies.
+  </footer>
+</div>
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const MINE_KEY = 'museref:mine';
+  const mine = () => JSON.parse(localStorage.getItem(MINE_KEY) || '[]');
+  let current = null;
+
+  function toast(text) {
+    const t = $('toast');
+    t.textContent = text;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 1600);
+  }
+
+  function ago(ts) {
+    const s = Math.max(0, (Date.now() - ts) / 1000);
+    if (s < 60) return 'just now';
+    if (s < 3600) return Math.floor(s / 60) + ' min ago';
+    if (s < 86400) return Math.floor(s / 3600) + ' h ago';
+    return Math.floor(s / 86400) + ' d ago';
+  }
+
+  async function api(path, opts) {
+    const r = await fetch(path, opts);
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(data.error || 'Request failed');
+    return data;
+  }
+
+  async function loadStats() {
+    try {
+      const s = await api('/api/stats');
+      $('s-pool').textContent = s.inPool;
+      $('s-conf').textContent = s.confirmed;
+      const ul = $('recent');
+      ul.innerHTML = '';
+      if (!s.recent.length) {
+        ul.innerHTML = '<li class="empty">Nothing handed out yet.</li>';
+        return;
+      }
+      for (const r of s.recent) {
+        const li = document.createElement('li');
+        const c = document.createElement('code');
+        c.textContent = r.code;
+        const t = document.createElement('span');
+        t.className = 't';
+        t.textContent = `${ago(r.t)} · ~${r.remaining} left`;
+        li.append(c, t);
+        ul.append(li);
+      }
+    } catch {
+      $('recent').innerHTML = '<li class="empty">Could not load the pool.</li>';
+    }
+  }
+
+  $('get').addEventListener('click', async () => {
+    const btn = $('get');
+    btn.disabled = true;
+    try {
+      const d = await api('/api/code?exclude=' + encodeURIComponent(mine().join(',')));
+      current = d.code;
+      $('code').textContent = d.code;
+      $('code').classList.remove('placeholder');
+      $('code-meta').textContent = `~${d.remaining} uses left` + (d.worked ? ` · confirmed ${d.worked}×` : '');
+      $('copy').disabled = false;
+      $('feedback').classList.add('show');
+      $('feedback').querySelectorAll('button').forEach((b) => (b.disabled = false));
+      btn.textContent = 'Get another';
+      loadStats();
+    } catch (e) {
+      $('code-meta').textContent = e.message;
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  $('copy').addEventListener('click', async () => {
+    if (!current) return;
+    try {
+      await navigator.clipboard.writeText(current);
+    } catch {
+      const r = document.createRange();
+      r.selectNodeContents($('code'));
+      getSelection().removeAllRanges();
+      getSelection().addRange(r);
+      document.execCommand('copy');
+    }
+    toast('Copied ' + current);
+  });
+
+  $('feedback').addEventListener('click', async (e) => {
+    const result = e.target.dataset.r;
+    if (!result || !current) return;
+    $('feedback').querySelectorAll('button').forEach((b) => (b.disabled = true));
+    try {
+      await api('/api/report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: current, result }),
+      });
+      toast(result === 'worked' ? 'Thanks! Now add your own code ↓' : 'Thanks — grab another one.');
+      loadStats();
+    } catch (err) {
+      toast(err.message);
+    }
+  });
+
+  $('add-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msg = $('add-msg');
+    const code = $('add-input').value.trim().toUpperCase().replace(/[\s-]/g, '');
+    msg.className = 'msg';
+    try {
+      await api('/api/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code }),
+      });
+      localStorage.setItem(MINE_KEY, JSON.stringify([...new Set([...mine(), code])]));
+      msg.textContent = `Added ${code} — thanks for paying it forward!`;
+      msg.classList.add('ok');
+      $('add-input').value = '';
+      loadStats();
+    } catch (err) {
+      msg.textContent = err.message;
+      msg.classList.add('err');
+    }
+  });
+
+  loadStats();
+})();
+</script>
+</body>
+</html>
