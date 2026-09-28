@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MuseRef — Muse referral codes, shared fairly</title>
-<meta name="description" content="Free, community-shared Meta Muse referral codes. Take a code, leave yours behind — both of you get bonus tokens. Codes rotate so none burn out.">
-<meta property="og:title" content="MuseRef — Muse referral codes, shared fairly">
-<meta property="og:description" content="Take a code. Leave one behind. A fair rotating pool of Muse referral codes.">
+<title>MuseRef — Muse 추천 코드 공평하게 나누기</title>
+<meta name="description" content="커뮤니티가 함께 나누는 무료 Meta Muse 추천 코드. 코드를 하나 받고, 내 코드를 하나 남기면 서로 보너스 토큰을 받습니다. 코드가 순환되어 한 코드만 빨리 소진되지 않습니다.">
+<meta property="og:title" content="MuseRef — Muse 추천 코드 공평하게 나누기">
+<meta property="og:description" content="코드 하나 받고, 코드 하나 남기기. 공평하게 순환되는 Muse 추천 코드 풀.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0e0f14">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
@@ -20,7 +20,8 @@
   html { scroll-behavior: smooth; }
   body {
     margin: 0; background: var(--bg); color: var(--text);
-    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font: 16px/1.6 system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", Roboto, sans-serif;
+    word-break: keep-all;
     background-image: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139,123,255,.18), transparent);
   }
   a { color: var(--accent2); text-decoration: none; }
@@ -95,73 +96,73 @@
 <div class="wrap">
   <header>
     <a class="brand" href="/">✦ Muse<span>Ref</span></a>
-    <nav><a href="#share">Share</a><a href="#faq">FAQ</a></nav>
+    <nav><a href="#share">코드 등록</a><a href="#faq">자주 묻는 질문</a></nav>
   </header>
 
   <section class="hero">
-    <h1>Take a code.<br><em>Leave one behind.</em></h1>
-    <p class="lead">Redeem someone's Muse referral code and you both get bonus tokens. Codes rotate through a shared pool so no single code gets burned out in minutes.</p>
-    <div class="stats" id="stats"><b id="s-pool">–</b> codes in rotation · <b id="s-conf">–</b> confirmed redemptions</div>
+    <h1>코드 하나 받고,<br><em>코드 하나 남기기.</em></h1>
+    <p class="lead">다른 사람의 Muse 추천 코드를 입력하면 두 사람 모두 보너스 토큰을 받습니다. 코드는 공용 풀에서 돌아가며 나눠 주기 때문에 한 코드만 몇 분 만에 소진되지 않습니다.</p>
+    <div class="stats" id="stats">순환 중인 코드 <b id="s-pool">–</b>개 · 사용 확인 <b id="s-conf">–</b>회</div>
   </section>
 
   <section class="card codebox">
-    <div class="meta">Your code</div>
+    <div class="meta">받은 코드</div>
     <div class="code placeholder" id="code">––––––</div>
-    <div class="meta" id="code-meta">Press the button to get the next code in rotation.</div>
+    <div class="meta" id="code-meta">버튼을 누르면 다음 순서의 코드를 받습니다.</div>
     <div class="btns">
-      <button class="primary" id="get">Get a code</button>
-      <button id="copy" disabled>Copy</button>
+      <button class="primary" id="get">코드 받기</button>
+      <button id="copy" disabled>복사</button>
     </div>
     <div class="feedback" id="feedback">
-      <p>Did it work? Your answer keeps the pool healthy.</p>
+      <p>코드가 잘 적용됐나요? 알려 주시면 풀을 건강하게 유지할 수 있어요.</p>
       <div class="btns">
-        <button class="ok" data-r="worked">✓ It worked</button>
-        <button class="bad" data-r="dead">✕ Used up / invalid</button>
+        <button class="ok" data-r="worked">✓ 적용됐어요</button>
+        <button class="bad" data-r="dead">✕ 소진 / 유효하지 않음</button>
       </div>
     </div>
   </section>
 
   <section>
-    <h2>How it works</h2>
+    <h2>이용 방법</h2>
     <div class="steps">
-      <div class="step"><div class="n">01</div><h3>Get a code</h3><p>We hand out the code that's rested the longest and still has uses left.</p></div>
-      <div class="step"><div class="n">02</div><h3>Redeem in Muse</h3><p>Paste it in Muse's referral / invite settings. Both of you get the bonus.</p></div>
-      <div class="step"><div class="n">03</div><h3>Pay it forward</h3><p>Add your own referral code below so the next person can use it.</p></div>
+      <div class="step"><div class="n">01</div><h3>코드 받기</h3><p>가장 오래 쉬었고 아직 사용 횟수가 남은 코드를 나눠 드립니다.</p></div>
+      <div class="step"><div class="n">02</div><h3>Muse에서 입력</h3><p>Muse의 추천·초대 코드 입력란에 붙여 넣으세요. 두 사람 모두 보너스를 받습니다.</p></div>
+      <div class="step"><div class="n">03</div><h3>내 코드 남기기</h3><p>아래에 내 추천 코드를 등록해 다음 사람이 쓸 수 있게 해 주세요.</p></div>
     </div>
   </section>
 
   <section class="card" id="share">
-    <h2>Add your code to the pool</h2>
+    <h2>내 코드를 풀에 등록하기</h2>
     <form id="add-form">
-      <input id="add-input" maxlength="16" placeholder="e.g. K4M2QP" autocomplete="off" spellcheck="false" aria-label="Your referral code">
-      <button class="primary" type="submit">Add to pool</button>
+      <input id="add-input" maxlength="16" placeholder="예: K4M2QP" autocomplete="off" spellcheck="false" aria-label="내 추천 코드">
+      <button class="primary" type="submit">풀에 등록</button>
     </form>
     <div class="msg" id="add-msg"></div>
   </section>
 
   <section class="card">
-    <h2>Recently handed out</h2>
-    <ul class="recent" id="recent"><li class="empty">Loading…</li></ul>
+    <h2>최근 나간 코드</h2>
+    <ul class="recent" id="recent"><li class="empty">불러오는 중…</li></ul>
   </section>
 
   <section class="card" id="faq">
-    <h2>FAQ</h2>
-    <details><summary>What do I get for redeeming a code?</summary><p>Muse gives bonus tokens to both the person redeeming and the code owner. The exact amount is set by Meta and may change.</p></details>
-    <details><summary>Where do I redeem it?</summary><p>In the Muse app or on the web, open settings and look for the referral / invite code field.</p></details>
-    <details><summary>Why did my code say it's used up?</summary><p>Each referral code has a limited number of uses (typically 20–30). Tap "Used up / invalid" so we retire it and hand out a fresh one.</p></details>
-    <details><summary>How is "uses left" estimated?</summary><p>We count how many times a code has been handed out here and assume a cap of 25. It's an estimate — people outside this site may have used it too.</p></details>
-    <details><summary>Will I get my own code back?</summary><p>No. Codes you added from this browser are skipped when you ask for one.</p></details>
-    <details><summary>Is this affiliated with Meta?</summary><p>No. MuseRef is an independent community project and is not affiliated with, endorsed by, or sponsored by Meta.</p></details>
+    <h2>자주 묻는 질문</h2>
+    <details><summary>코드를 입력하면 무엇을 받나요?</summary><p>Muse가 코드를 입력한 사람과 코드 주인 모두에게 보너스 토큰을 줍니다. 정확한 양은 Meta가 정하며 바뀔 수 있습니다.</p></details>
+    <details><summary>어디에 입력하나요?</summary><p>Muse 앱이나 웹에서 설정을 열고 추천·초대 코드 입력란을 찾으세요.</p></details>
+    <details><summary>코드가 소진됐다고 나와요.</summary><p>추천 코드마다 사용 횟수 제한이 있습니다(보통 20–30회). "소진 / 유효하지 않음"을 눌러 주시면 해당 코드를 빼고 새 코드를 나눠 드립니다.</p></details>
+    <details><summary>"남은 횟수"는 어떻게 계산하나요?</summary><p>이 사이트에서 코드가 나간 횟수를 세고 최대 25회로 가정해 계산합니다. 사이트 밖에서도 쓰였을 수 있어 추정치입니다.</p></details>
+    <details><summary>내가 등록한 코드를 내가 받게 되나요?</summary><p>아니요. 이 브라우저에서 등록한 코드는 코드를 받을 때 제외됩니다.</p></details>
+    <details><summary>Meta와 관련된 사이트인가요?</summary><p>아니요. MuseRef는 독립적인 커뮤니티 프로젝트이며 Meta와 제휴·보증·후원 관계가 없습니다.</p></details>
   </section>
 
-  <p class="warn">Codes are public and can run out. <b>Never pay for a referral code.</b></p>
+  <p class="warn">코드는 공개되어 있고 소진될 수 있습니다. <b>추천 코드에 절대 돈을 내지 마세요.</b></p>
 
   <footer>
-    MuseRef is an independent community site, not affiliated with Meta. “Muse” is a trademark of its owner.<br>
-    We store only the codes you submit and anonymous usage counts. No accounts, no tracking cookies.
+    MuseRef는 Meta와 관련 없는 독립 커뮤니티 사이트입니다. “Muse”는 해당 소유자의 상표입니다.<br>
+    등록하신 코드와 익명 사용 횟수만 저장합니다. 회원가입도, 추적 쿠키도 없습니다.
   </footer>
 </div>
-<div class="toast" id="toast">Copied!</div>
+<div class="toast" id="toast">복사됨!</div>
 
 <script>
 (() => {
@@ -179,16 +180,16 @@
 
   function ago(ts) {
     const s = Math.max(0, (Date.now() - ts) / 1000);
-    if (s < 60) return 'just now';
-    if (s < 3600) return Math.floor(s / 60) + ' min ago';
-    if (s < 86400) return Math.floor(s / 3600) + ' h ago';
-    return Math.floor(s / 86400) + ' d ago';
+    if (s < 60) return '방금 전';
+    if (s < 3600) return Math.floor(s / 60) + '분 전';
+    if (s < 86400) return Math.floor(s / 3600) + '시간 전';
+    return Math.floor(s / 86400) + '일 전';
   }
 
   async function api(path, opts) {
     const r = await fetch(path, opts);
     const data = await r.json().catch(() => ({}));
-    if (!r.ok) throw new Error(data.error || 'Request failed');
+    if (!r.ok) throw new Error(data.error || '요청에 실패했습니다.');
     return data;
   }
 
@@ -200,7 +201,7 @@
       const ul = $('recent');
       ul.innerHTML = '';
       if (!s.recent.length) {
-        ul.innerHTML = '<li class="empty">Nothing handed out yet.</li>';
+        ul.innerHTML = '<li class="empty">아직 나간 코드가 없습니다.</li>';
         return;
       }
       for (const r of s.recent) {
@@ -209,12 +210,12 @@
         c.textContent = r.code;
         const t = document.createElement('span');
         t.className = 't';
-        t.textContent = `${ago(r.t)} · ~${r.remaining} left`;
+        t.textContent = `${ago(r.t)} · 약 ${r.remaining}회 남음`;
         li.append(c, t);
         ul.append(li);
       }
     } catch {
-      $('recent').innerHTML = '<li class="empty">Could not load the pool.</li>';
+      $('recent').innerHTML = '<li class="empty">풀 정보를 불러오지 못했습니다.</li>';
     }
   }
 
@@ -226,11 +227,11 @@
       current = d.code;
       $('code').textContent = d.code;
       $('code').classList.remove('placeholder');
-      $('code-meta').textContent = `~${d.remaining} uses left` + (d.worked ? ` · confirmed ${d.worked}×` : '');
+      $('code-meta').textContent = `약 ${d.remaining}회 남음` + (d.worked ? ` · 사용 확인 ${d.worked}회` : '');
       $('copy').disabled = false;
       $('feedback').classList.add('show');
       $('feedback').querySelectorAll('button').forEach((b) => (b.disabled = false));
-      btn.textContent = 'Get another';
+      btn.textContent = '다른 코드 받기';
       loadStats();
     } catch (e) {
       $('code-meta').textContent = e.message;
@@ -250,7 +251,7 @@
       getSelection().addRange(r);
       document.execCommand('copy');
     }
-    toast('Copied ' + current);
+    toast(current + ' 복사됨!');
   });
 
   $('feedback').addEventListener('click', async (e) => {
@@ -263,7 +264,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code: current, result }),
       });
-      toast(result === 'worked' ? 'Thanks! Now add your own code ↓' : 'Thanks — grab another one.');
+      toast(result === 'worked' ? '감사합니다! 이제 내 코드도 등록해 주세요 ↓' : '감사합니다. 다른 코드를 받아 보세요.');
       loadStats();
     } catch (err) {
       toast(err.message);
@@ -282,7 +283,7 @@
         body: JSON.stringify({ code }),
       });
       localStorage.setItem(MINE_KEY, JSON.stringify([...new Set([...mine(), code])]));
-      msg.textContent = `Added ${code} — thanks for paying it forward!`;
+      msg.textContent = `${code} 등록 완료 — 나눔에 감사드려요!`;
       msg.classList.add('ok');
       $('add-input').value = '';
       loadStats();

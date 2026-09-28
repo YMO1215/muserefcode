@@ -3,7 +3,7 @@ const { store, remaining } = require('../lib/store');
 const { send, wrap } = require('../lib/http');
 
 module.exports = wrap(async (req, res) => {
-  if (req.method !== 'GET') return send(res, 405, { error: 'Method not allowed' });
+  if (req.method !== 'GET') return send(res, 405, { error: '허용되지 않는 요청 방식입니다.' });
   const s = await store.stats();
   const recent = await Promise.all(
     s.recent.map(async (r) => {

@@ -5,9 +5,9 @@ const { normalizeCode, clientIp, send, wrap } = require('../lib/http');
 const CANDIDATES = 10;
 
 module.exports = wrap(async (req, res) => {
-  if (req.method !== 'GET') return send(res, 405, { error: 'Method not allowed' });
+  if (req.method !== 'GET') return send(res, 405, { error: '허용되지 않는 요청 방식입니다.' });
   if (!(await store.rateLimit(`get:${clientIp(req)}`, 20, 600))) {
-    return send(res, 429, { error: 'Too many requests. Wait a few minutes.' });
+    return send(res, 429, { error: '요청이 너무 많습니다. 몇 분 뒤 다시 시도해 주세요.' });
   }
   const q = new URL(req.url, 'http://x').searchParams.get('exclude') || '';
   const exclude = new Set(q.split(',').map(normalizeCode).filter(Boolean));
@@ -22,5 +22,5 @@ module.exports = wrap(async (req, res) => {
     const after = await store.markServed(code);
     return send(res, 200, { code, remaining: remaining(after), worked: after.worked });
   }
-  send(res, 404, { error: 'The pool is empty right now. Add your code to get it started!' });
+  send(res, 404, { error: '지금은 풀이 비어 있습니다. 첫 코드를 등록해 주세요!' });
 });
