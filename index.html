@@ -57,8 +57,7 @@
   /* hero */
   .hero { padding: 56px 0 36px; }
   h1 { font-size: clamp(30px, 7vw, 44px); font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; margin: 0 0 14px; }
-  .sub { color: var(--dim); font-size: 17px; margin: 0 0 28px; }
-  .cta { display: flex; gap: 10px; flex-wrap: wrap; }
+  .sub { color: var(--dim); font-size: 17px; margin: 0; }
 
   /* buttons */
   .btn {
@@ -166,7 +165,6 @@
     .card { padding: 20px; }
     .card + .card, .card { margin-bottom: 16px; }
     .code { font-size: 28px; }
-    .cta .btn { flex: 1 1 0; }
     .sticky-cta {
       display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
       padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
@@ -198,10 +196,6 @@
   <section class="hero">
     <h1>코드 하나 받고,<br>코드 하나 남기기.</h1>
     <p class="sub">남의 추천 코드를 쓰면 둘 다 보너스 토큰을 받아요.<br>공용 풀에서 돌아가며 나눠 드립니다.</p>
-    <div class="cta">
-      <a class="btn primary" href="#get-card">코드 받기</a>
-      <a class="btn" href="#share">내 코드 등록하기</a>
-    </div>
   </section>
 
   <section class="card codebox" id="get-card" aria-labelledby="get-title">
