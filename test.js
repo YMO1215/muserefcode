@@ -45,6 +45,13 @@ function call(handler, method, url, body, ip = '1.1.1.1') {
   assert.strictEqual(s.inPool, 1); // ZZZ999 retired
   assert.strictEqual(s.confirmed, 1);
   assert.strictEqual(s.recent.length, 2);
+  assert.strictEqual(s.added.length, 2);
+  assert.ok(s.added.find((a) => a.code === 'ZZZ999').retired);
+
+  // Only the caller's own code is left -> dedicated message, not "pool is empty".
+  const own = await call(code, 'GET', '/api/code?exclude=K4M2QP', null, '5.5.5.5');
+  assert.strictEqual(own.status, 404);
+  assert.match(own.body.error, /내가 등록한 코드만/);
   console.log('all tests passed', s);
 })().catch((e) => {
   console.error(e);

@@ -12,8 +12,12 @@ module.exports = wrap(async (req, res) => {
   const q = new URL(req.url, 'http://x').searchParams.get('exclude') || '';
   const exclude = new Set(q.split(',').map(normalizeCode).filter(Boolean));
 
+  let skippedOwn = false;
   for (const code of await store.candidates(CANDIDATES)) {
-    if (exclude.has(code)) continue;
+    if (exclude.has(code)) {
+      skippedOwn = true;
+      continue;
+    }
     const info = await store.info(code);
     if (!info || remaining(info) <= 0 || info.dead >= DEAD_REPORTS) {
       await store.retire(code);
@@ -22,5 +26,9 @@ module.exports = wrap(async (req, res) => {
     const after = await store.markServed(code);
     return send(res, 200, { code, remaining: remaining(after), worked: after.worked });
   }
-  send(res, 404, { error: '지금은 풀이 비어 있습니다. 첫 코드를 등록해 주세요!' });
+  send(res, 404, {
+    error: skippedOwn
+      ? '지금 풀에는 내가 등록한 코드만 있어요. 다른 사람이 코드를 등록하면 받을 수 있어요.'
+      : '지금은 풀이 비어 있습니다. 첫 코드를 등록해 주세요!',
+  });
 });
