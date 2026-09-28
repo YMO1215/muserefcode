@@ -1,5 +1,5 @@
 // GET /api/stats — pool size, confirmed redemptions, recently handed out codes.
-const { store, remaining } = require('../lib/store');
+const { store, remaining, persistent } = require('../lib/store');
 const { send, wrap } = require('../lib/http');
 
 module.exports = wrap(async (req, res) => {
@@ -11,5 +11,5 @@ module.exports = wrap(async (req, res) => {
       return { code: r.code, t: r.t, remaining: info ? remaining(info) : 0 };
     }),
   );
-  send(res, 200, { inPool: s.inPool, confirmed: s.confirmed, recent });
+  send(res, 200, { inPool: s.inPool, confirmed: s.confirmed, recent, storage: persistent ? 'redis' : 'memory' });
 });
